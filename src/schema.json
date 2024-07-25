@@ -1,0 +1,71 @@
+{
+    "project": {
+        "name": "panaceia",
+        "language": "python",
+        "framework": "flask",
+        "environment": "production",
+        "squad": "sre",
+        "chapter": "sre",
+        "guild": "sre",
+        "tribe": "sre"
+    },
+    "resources": [
+        {
+            "database": {
+                "name": "",
+                "database-type": "",
+                "database-version": "",
+                "storage-capacity": "",
+                "cpu-capacity": "",
+                "memory-capacity": "",
+                "flags": [],
+                "labels": [],
+                "region": "",
+                "instance-type": "",
+                "connections": {},
+                "backup": {},
+                "maintenance": {},
+                "zonal-availability": {
+                    "primary-zone": "",
+                    "secondary-zone": ""
+                }
+            }
+        },
+        {
+            "cache": {
+                "name": "",
+                "type": ""
+            }
+        },
+        {
+            "messaging": {
+                "name": "",
+                "type": ""
+            }
+        },
+        {
+            "code-repository": {
+                "name": "",
+                "members": []
+            }
+        },
+        {
+            "external-ips": {
+                "name": "",
+                "availability": ""
+            }
+        },
+        {
+            "fqdn": {
+                "name": "",
+                "ip-address": ""
+            }
+        }
+    ],
+    "templates": [
+        "dockerfile",
+        "makefile",
+        "k8s-manifests",
+        "jenkinsfile"
+    ]
+}

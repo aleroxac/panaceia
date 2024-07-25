@@ -1,0 +1,15 @@
+root = true
+
+[Makefile,Dockerfile,*.yml]
+indent_size = 2
+charset = utf-8
+indent_style = space
+insert_final_newline = false
+trim_trailing_whitespace = true
+
+[*.py]
+indent_size = 4
+charset = utf-8
+indent_style = space
+insert_final_newline = false
+trim_trailing_whitespace = true

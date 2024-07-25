@@ -1,0 +1,27 @@
+apiVersion: extensions/v1
+kind: Ingress
+metadata:
+  name: panaceia
+  namespace: panaceia
+  labels:
+    app: panaceia
+  annotations:
+    kubernetes.io/ingress.class: nginx-internal
+    cert-manager.io/cluster-issuer: letsencrypt-prd
+spec:
+  ingressClassName: nginx-internal
+  tls:
+    - hosts:
+        - panaceia-ENVIRONMENT.internal.aleroxac.dev
+      secretName: panaceia-cert-secret
+  rules:
+    - host: panaceia-ENVIRONMENT.internal.aleroxac.dev
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: panaceia
+                port:
+                  number: 8080

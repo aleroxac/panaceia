@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: panaceia
+  namespace: panaceia
+  labels:
+    app: panaceia
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: panaceia
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 0
+  template:
+    metadata:
+      name: panaceia
+      namespace: panaceia
+      labels:
+        app: panaceia
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: panaceia
+          imagePullPolicy: Always
+          image: gcr.io/aleroxac/panaceia:TAG_VERSION
+          envFrom:
+            - secretRef:
+                name: panaceia
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 1
+              memory: 1Gi
+          securityContext:
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsGroup: 100
+            runAsUser: 100
+          readinessProbe:
+            httpGet:
+              httpHeaders:
+                - name: Accept
+                  value: application/json
+              path: "/api/v1/health/readiness"
+              port: 8080
+            successThreshold: 1
+            failureThreshold: 3
+            initialDelaySeconds: 5
+            timeoutSeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              httpHeaders:
+                - name: Accept
+                  value: application/json
+              path: "/api/v1/health/liveness"
+              port: 8080
+            successThreshold: 1
+            failureThreshold: 3
+            initialDelaySeconds: 5
+            timeoutSeconds: 10
+            periodSeconds: 10

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: panaceia
+  namespace: panaceia
+  labels:
+    app: panaceia
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 80
+  selector:
+    app: panaceia
